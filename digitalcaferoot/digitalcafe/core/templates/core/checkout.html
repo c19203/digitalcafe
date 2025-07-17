@@ -1,0 +1,32 @@
+<h1>Checkout</h1>
+<a href="/">Back to products</a>
+<p>Hi, {{ user.username }}!</p>
+
+<!-- if there are cart items, then show the table and form -->
+{% if cart_items %} 
+    <table>
+        <tr>
+            <th>Product name</th>
+            <th>Quantity</th>
+        </tr>
+
+        <!-- loops over all cart_items passed into the template -->
+        {% for cart_item in cart_items %}
+            <!-- builds a row in the table for every product in the cart -->
+            <tr>
+                <td>{{ cart_item.product.name }}</td>
+                <td>{{ cart_item.quantity }}</td>
+            </tr>
+        {% endfor %}
+    
+    <!-- create a form by creating a submit button called "Checkout" -->
+    </table>
+    <form method="POST" action="#">
+        {% csrf_token %}
+        <input type="submit" value="Checkout">
+    </form>
+
+<!-- If cart_items is empty, we show a message instead of the form and table. -->
+{% else %}
+    <p>No cart items.</p>
+{% endif %}

@@ -1,0 +1,28 @@
+{% if product_data %}
+    <p>Hi, {{ user.username }}!</p>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            {% for product_record in product_data %}
+                <tr>
+                    <td><a href="/product/{{ product_record.id }}">{{ product_record.name }}</a></td>
+                    <td>{{ product_record.price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+{% endif %}
+
+<!-- If there are any messages, display them in a <ul> list --> 
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if messages.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<a href="/checkout">Go to check out</a>
+
+<a href="/transaction-history">View Transaction History</a>
